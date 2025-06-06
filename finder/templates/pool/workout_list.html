@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="container">
+    <h2>My Workouts</h2>
+    <a href="{% url 'add_workout' %}" class="btn btn-primary mb-3">Add New Workout</a>
+
+    {% if workouts %}
+        <div class="workout-list">
+            {% for workout in workouts %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ workout.date }}</h5>
+                        <p class="card-text">
+                            Distance: {{ workout.distance_meters }}m<br>
+                            Duration: {{ workout.duration_minutes }} minutes<br>
+                            Stroke: {{ workout.get_stroke_type_display }}
+                        </p>
+                        {% if workout.notes %}
+                            <p class="card-text"><small>Notes: {{ workout.notes }}</small></p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No workouts added yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

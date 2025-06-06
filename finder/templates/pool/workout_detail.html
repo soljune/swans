@@ -1,0 +1,21 @@
+<!-- pool/workout_detail.html -->
+{% extends 'main.html' %}
+{% block content %}
+<div class="container my-4">
+    <h2>Workout Details</h2>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Date: {{ workout.date }}</h5>
+            <p class="card-text">Description: {{ workout.description }}</p>
+            <p class="card-text">Distance: {{ workout.distance }} meters</p>
+            <p class="card-text">Duration: {{ workout.duration }} minutes</p>
+            <p class="card-text">Pool: {{ workout.pool.name }}</p>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'workout_update' workout.pk %}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'workout_delete' workout.pk %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'workout_list' %}" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Search Workouts</h2>
+
+  <form method="GET" action="{% url 'search_workout' %}" class="mb-4">
+    <div class="input-group">
+      <input type="text" name="query" class="form-control" placeholder="Search workouts..." value="{{ query }}">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </form>
+
+  {% if query %}
+    <h3>Results for "{{ query }}"</h3>
+
+    {% if workouts %}
+      <div class="list-group">
+        {% for workout in workouts %}
+          <a href="{% url 'workout_detail' workout.pk %}" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">{{ workout.date }}</h5>
+              <small>{{ workout.distance }} meters</small>
+            </div>
+            <p class="mb-1">{{ workout.description|truncatechars:100 }}</p>
+            <small>Pool: {{ workout.pool.name }}</small>
+          </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>No workouts found matching your search.</p>
+    {% endif %}
+  {% endif %}
+</div>
+{% endblock %}

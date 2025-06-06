@@ -1,0 +1,29 @@
+<!-- navbar.html -->
+<nav class="navbar navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'home' %}">MN</a>
+    <ul class="navbar-nav d-flex flex-row">
+      <li class="nav-item me-3">
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+      </li>
+      {% if request.user.is_authenticated %}
+        <li class="nav-item me-3">
+          <a class="nav-link" href="{% url 'workout_list' %}">Workouts</a>
+        </li>
+        <li class="nav-item me-3">
+          <a class="nav-link" href="{% url 'pool_list' %}">Pools</a>
+        </li>
+        <li class="nav-item me-3">
+          <span class="navbar-text">{{ request.user.username }}</span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+      {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}">Login</a>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>

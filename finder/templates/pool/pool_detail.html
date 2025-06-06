@@ -1,0 +1,19 @@
+<!-- pool/pool_detail.html -->
+{% extends 'main.html' %}
+{% block content %}
+<div class="container my-4">
+    <h2>Pool Details</h2>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ pool.name }}</h5>
+            <p class="card-text">Location: {{ pool.location }}</p>
+            <p class="card-text">Length: {{ pool.length }} meters</p>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'pool_update' pool.pk %}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'pool_delete' pool.pk %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'pool_list' %}" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

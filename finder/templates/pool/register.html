@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+{% block content %}
+<form  method="POST" class="container my-4">
+
+    {% csrf_token %}
+    {{form.as_p}}
+    {{bio.as_p}}
+    <input type="submit" value="create account"/>
+</form>
+
+
+{% endblock %}

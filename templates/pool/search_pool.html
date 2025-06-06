@@ -1,0 +1,35 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Search Pools</h2>
+
+  <form method="GET" action="{% url 'search' %}" class="mb-4">
+    <div class="input-group">
+      <input type="text" name="query" class="form-control" placeholder="Search pools..." value="{{ query }}">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </form>
+
+  {% if query %}
+    <h3>Results for "{{ query }}"</h3>
+
+    {% if pools %}
+      <div class="list-group">
+        {% for pool in pools %}
+          <a href="{% url 'pool_detail' pool.pk %}" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">{{ pool.name }}</h5>
+              <small>{{ pool.length }}m</small>
+            </div>
+            <p class="mb-1">{{ pool.address }}</p>
+            <small>{{ pool.city }}, {{ pool.state }}</small>
+          </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>No pools found matching your search.</p>
+    {% endif %}
+  {% endif %}
+</div>
+{% endblock %}
