@@ -1,4 +1,4 @@
-<!-- pool/workout_detail.html -->
+
 {% extends 'main.html' %}
 {% block content %}
 <div class="container my-4">
@@ -13,7 +13,7 @@
         </div>
         <div class="card-footer">
             <a href="{% url 'workout_update' workout.pk %}" class="btn btn-primary">Edit</a>
-            <a href="{% url 'workout_delete' workout.pk %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'deleteworkout' workout.pk %}" class="btn btn-danger">Delete</a>
             <a href="{% url 'workout_list' %}" class="btn btn-secondary">Back to List</a>
         </div>
     </div>

@@ -1,11 +1,17 @@
 {% extends 'main.html' %}
 {% block content %}
-<form method="POST" class="container my-4 ">
-  {% csrf_token %}
-  <div class="d-flex gap-3 justify-content-center ">
-    <div><a class="btn btn-block bg-dark text-light " href="{{request.META.HTTP_REFERER}}">I do not want to log out yet!</a></div>
-    <button type="submit" class="btn btn-block bg-primary"> logout</button>
-    <div>
-</form>
-
+<div class="bg-dark text-light py-5">
+  <div class="container text-center">
+    <h2 class="mb-4">Are you sure you want to log out?</h2>
+    <form method="POST" class="d-flex justify-content-center gap-3">
+      {% csrf_token %}
+      <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-outline-light">
+       no
+      </a>
+      <button type="submit" class="btn btn-danger">
+        Log out
+      </button>
+    </form>
+  </div>
+</div>
 {% endblock %}

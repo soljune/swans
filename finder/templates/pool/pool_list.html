@@ -1,40 +1,63 @@
 {% extends 'main.html' %}
 {% block content %}
-    <a href="{% url 'add_pool' %}" class="btn btn-primary mb-3">add a pool</a>
+<style>
+  body {
+    background: linear-gradient(to right, #000428, #004e92);
+    background-attachment: fixed;
+    color: #f8f9fa;
+  }
 
+  .card:hover {
+    transform: scale(1.02);
+  }
+</style>
 
-    <div class="row">
-        {% for pool in pools %}
-            <div class="col-md-4 mb-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Pool by {{ pool.user }}</h5>
-                        <p class="card-text">
-                            <strong>Address:</strong> {{ pool.address }}<br>
-                            <strong>Hours:</strong> {{ pool.open_time }} - {{ pool.close_time }}<br>
-                            <strong>Entry Price:</strong> ${{ pool.entry_price }}<br>
-                        </p>
-                        <ul class="list-unstyled">
-                            {% if pool.has_changing_room %}
-                                <li>✓ Changing Room</li>
-                            {% endif %}
-                            {% if pool.has_restaurant %}
-                                <li>✓ Restaurant</li>
-                            {% endif %}
-                            {% if pool.has_parking %}
-                                <li>✓ Parking</li>
-                            {% endif %}
-                        </ul>
-                        {% if pool.notes %}
-                            <p class="card-text"><small>{{ pool.notes }}</small></p>
-                        {% endif %}
-                    </div>
+<div class="container py-5">
+  <h2 class="mb-4 text-center text-light">🏊 Available Pools</h2>
+  <div class="text-center mb-4">
+    <a href="{% url 'add_pool' %}" class="btn btn-lg btn-success shadow">+ Add a Pool</a>
+  </div>
+
+  {% if pools %}
+    <div class="row g-4">
+      {% for pool in pools %}
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 border-0 shadow-lg">
+            <div class="card-header bg-gradient text-white" style="background: linear-gradient(135deg, #1e3c72, #2a5298);">
+              <h5 class="mb-0 text-dark">🏊 Pool by {{ pool.user }}</h5>
+            </div>
+            <div class="card-body bg-light text-dark">
+              <p>📍 Address: {{ pool.address }}</p>
+              <p>🕒 Hours: {{ pool.open_time }} – {{ pool.close_time }}</p>
+              <p>💸 Entry: ${{ pool.entry_price }}</p>
+
+              {% if pool.has_changing_room or pool.has_restaurant or pool.has_parking %}
+                <div class="mb-2">
+                  {% if pool.has_changing_room %}
+                    <span class="badge bg-info text-dark">Changing Room</span>
+                  {% endif %}
+                  {% if pool.has_restaurant %}
+                    <span class="badge bg-warning text-dark">Restaurant</span>
+                  {% endif %}
+                  {% if pool.has_parking %}
+                    <span class="badge bg-success">Parking</span>
+                  {% endif %}
                 </div>
+              {% endif %}
+
+              {% if pool.notes %}
+                <p class="small text-muted">📝 {{ pool.notes }}</p>
+              {% endif %}
             </div>
-        {% empty %}
-            <div class="col-12">
-                <p>No pools available yet.</p>
+            <div class="card-footer bg-light">
+              <a href="{% url 'pool_update' pool.pk %}" class="btn btn-sm btn-outline-primary">✏️ Edit</a>
             </div>
-        {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
     </div>
+  {% else %}
+    <p class="text-center mt-4 text-light">No pools available yet.</p>
+  {% endif %}
+</div>
 {% endblock %}

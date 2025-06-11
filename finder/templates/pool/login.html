@@ -1,5 +1,46 @@
 {% extends 'main.html' %}
 {% block content %}
+
+<style>
+  body {
+    background-color: #0d1b2a;
+    color: #f8f9fa;
+  }
+
+  form {
+    max-width: 500px;
+    margin: 5rem auto;
+    padding: 2rem;
+    background-color: #1b263b;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  }
+
+  .form-control {
+    background-color: #e0e1dd;
+    border: none;
+    border-radius: 8px;
+  }
+
+  .form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(13,110,253,.25);
+  }
+
+  label {
+    color: #f8f9fa;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+
+
+  a.text-primary {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+  }
+</style>
+
 <form method="POST" class="border border-primary justify-content-center">
     {% csrf_token %}
     <div class="form-group w-50">
@@ -10,8 +51,11 @@
       <label>Password</label>
       <input type="password" class="form-control item" name="password" id="exampleInputPassword1" placeholder="Password">
     </div>
-        <div><a href="{% url 'register' %}" class="text-primary">don't have an account? </a></div>
+    <div>
 
+    </div>
     <button type="submit" class="btn btn-block bg-primary">Login</button>
+     <a href="{% url 'register' %}" class="text-primary">don't have an account? </a>
 </form>
+
 {% endblock %}

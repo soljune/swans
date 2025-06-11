@@ -1,10 +1,15 @@
-<!-- navbar.html -->
+
 <nav class="navbar navbar-light bg-light">
   <div class="container">
-    <a class="navbar-brand" href="{% url 'home' %}">MN</a>
+    <a class="navbar-brand" href="{% url 'home' %}">🌊Dark Waters</a>
     <ul class="navbar-nav d-flex flex-row">
       <li class="nav-item me-3">
         <a class="nav-link" href="{% url 'home' %}">Home</a>
+      </li> <li class="nav-item me-3">
+        <a class="nav-link" href="{% url 'about' %}">about</a>
+      </li>
+     <li class="nav-item me-3">
+        <a class="nav-link" href="{% url 'contacts' %}">contacts</a>
       </li>
       {% if request.user.is_authenticated %}
         <li class="nav-item me-3">
@@ -13,6 +18,7 @@
         <li class="nav-item me-3">
           <a class="nav-link" href="{% url 'pool_list' %}">Pools</a>
         </li>
+        <li class="nav-item me-3">
         <li class="nav-item me-3">
           <span class="navbar-text">{{ request.user.username }}</span>
         </li>

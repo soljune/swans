@@ -1,5 +1,82 @@
 {% extends 'main.html' %}
 {% block content %}
-<h1>hello world</h1>
+<style>
+  body {
+    background-color: #0d1b2a;
+    color: #f8f9fa;
+  }
+
+  .section-box {
+    background-color: #1b263b;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+  }
+
+  .btn-outline-light {
+    border-color: #f8f9fa;
+    color: #f8f9fa;
+  }
+
+  .btn-outline-light:hover {
+    background-color: #f8f9fa;
+    color: #0d1b2a;
+  }
+</style>
+
+
+<section class="py-5 text-center">
+  <div class="container">
+    <h1 class="display-4 mb-3 fw-bold">Welcome to DarkWaters</h1>
+    <p class="lead">Helping swimmers track workouts and discover the best pools around them.</p>
+    {% if not user.is_authenticated %}
+      <a href="/login/" class="btn btn-lg btn-success mt-3">🌊 Get Started</a>
+    {% endif %}
+  </div>
+</section>
+
+
+<section class="py-5">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-4 mb-4">
+        <div class="section-box">
+          <h4>🏊 Find Pools</h4>
+          <p>Quickly locate nearby public and private pools using location-based search.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="section-box">
+          <h4>📋 Log Workouts</h4>
+          <p>Track your laps, strokes, distances, and more with clean and simple forms.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="section-box">
+          <h4>📊 Progress Insights</h4>
+          <p>See visual summaries of your training history and stay motivated.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="py-5 text-center">
+  <div class="container">
+    <h3 class="fw-semibold">Why DarkWaters?</h3>
+    <p class="mb-4">We make swim tracking effortless — whether you're a casual swimmer or a competitive athlete.</p>
+    <a href="/about/" class="btn btn-outline-light">Learn More About Us</a>
+  </div>
+</section>
+
+<section>
+<!--  <p>dark waters offers subscriptions to help with tracking and give you reminders and tips from the top swimmers.This will turn your best self in swmming</p>-->
+
+<!--  <a href="payment/">see subscription plans</a>-->
+
+
+
+</section>
 
 {% endblock %}

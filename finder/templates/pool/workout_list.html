@@ -1,29 +1,50 @@
 {% extends 'main.html' %}
 {% block content %}
-<div class="container">
-    <h2>My Workouts</h2>
-    <a href="{% url 'add_workout' %}" class="btn btn-primary mb-3">Add New Workout</a>
+<style>
+  body {
+    background: linear-gradient(to right, #000428, #004e92);
+    background-attachment: fixed;
+    color: #f8f9fa;
+  }
 
-    {% if workouts %}
-        <div class="workout-list">
-            {% for workout in workouts %}
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ workout.date }}</h5>
-                        <p class="card-text">
-                            Distance: {{ workout.distance_meters }}m<br>
-                            Duration: {{ workout.duration_minutes }} minutes<br>
-                            Stroke: {{ workout.get_stroke_type_display }}
-                        </p>
-                        {% if workout.notes %}
-                            <p class="card-text"><small>Notes: {{ workout.notes }}</small></p>
-                        {% endif %}
-                    </div>
-                </div>
-            {% endfor %}
+  .card:hover {
+    transform: scale(1.02);
+  }
+</style>
+
+<div class="container py-5">
+  <h2 class="mb-4 text-center text-light">💪 My Swim Workouts</h2>
+  <div class="text-center mb-4">
+    <a href="{% url 'add_workout' %}" class="btn btn-lg btn-success shadow">+ Add New Workout</a>
+  </div>
+
+  {% if workouts %}
+    <div class="row g-4">
+      {% for workout in workouts %}
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 border-0 shadow-lg">
+            <div class="card-header bg-gradient text-white" style="background: linear-gradient(135deg, #1e3c72, #2a5298);">
+              <h5 class="mb-0 text-dark">🏊 {{workout.pk}}: {{ workout.date }}</h5>
+            </div>
+            <div class="card-body bg-light text-dark">
+              <p>📏 Distance: {{ workout.distance_meters }} meters</p>
+              <p>⏱ Duration: {{ workout.duration_minutes }} minutes</p>
+              <p>💪 Stroke:
+                <span class="badge bg-dark text-white">{{ workout.get_stroke_type_display }}</span>
+              </p>
+              {% if workout.notes %}
+                <p class="small text-muted">📝 {{ workout.notes }}</p>
+              {% endif %}
+            </div>
+            <div class="card-footer bg-light">
+              <a href="{% url 'workout_update' workout.pk %}" class="btn btn-sm btn-outline-primary">✏️ Edit</a>
+            </div>
+          </div>
         </div>
-    {% else %}
-        <p>No workouts added yet.</p>
-    {% endif %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-center mt-4 text-light">No workouts added yet.</p>
+  {% endif %}
 </div>
 {% endblock %}

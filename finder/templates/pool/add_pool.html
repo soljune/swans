@@ -1,11 +1,22 @@
 {% extends 'main.html' %}
 {% block content %}
- <h2>Add New Pool</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save Pool</button>
-  </form>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">🏊 Add New Pool</h4>
+        </div>
+        <div class="card-body">
+          <form method="post" novalidate>
+            {% csrf_token %}
+            {{ form.as_p }}
 
-
+            <button type="submit" class="btn btn-success w-100 mt-3">💾 Save Pool</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

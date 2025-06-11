@@ -6,6 +6,34 @@ from .forms import SwimWorkoutForm,PoolForm
 from .models import SwimWorkout,Pool
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+# from django_daraja.mpesa.core import MpesaClient
+#
+#
+# def payment(request):
+#     cl = MpesaClient()
+#     response = cl.stk_push(
+#         phone_number='0704685849',
+#         amount=1,
+#         account_reference='Ref',
+#         transaction_desc='Desc',
+#         callback_url='https://yourapp.com/callback/'
+#     )
+#     return render(response,request)
+
+
+
+def home(request):
+    return render(request, 'pool/home.html')
+
+
+def about(request):
+    return render(request, 'pool/about.html')
+
+def contacts(request):
+    return render(request, "pool/contacts.html")
+
+
+
 
 def register(request):
     if request.method == 'POST':
@@ -15,25 +43,25 @@ def register(request):
             return redirect('login')
         else:
             messages.error(request, 'Invalid form input')
-    return render(request, 'pool/register.html', {'form': form})
+    else:
+        form = UserCreationForm()
 
+    return render(request, 'pool/register.html', {'form': form})
 def loginUser(request):  
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        # checked whether the user exists in the DB => Users table
+
         try:
             user = User.objects.get(username=username)
         except:
             messages.error(request, "User does not exist!")
             return render(request, "pool/login.html")
-            
-        # authenticate the user and check whether the credentials are ok
+
         user = authenticate(request, username=username, password=password) 
         if user is not None: 
             login(request, user)
             messages.success(request, f"Welcome home {user.username}!")
-            # Get the next parameter from the request, default to 'home' if not present
             next_url = request.GET.get('next', 'home')
             return redirect(next_url)
         else:
@@ -65,9 +93,6 @@ def add_workout(request):
     else:
         form = SwimWorkoutForm()
     return render(request, 'pool/add workout.html', {'form': form})
-
-def home(request):
-    return render(request, 'pool/home.html')
 
 @login_required
 def add_pool(request):
@@ -104,14 +129,6 @@ def workout_update(request, pk):
     return render(request, 'pool/workout_form.html', {'form': form})
 
 @login_required
-def workout_delete(request, pk):
-    workout = get_object_or_404(SwimWorkout, pk=pk, user=request.user)
-    if request.method == 'POST':
-        workout.delete()
-        return redirect('workout_list')
-    return render(request, 'pool/workout_confirm_delete.html', {'workout': workout})
-
-@login_required
 def pool_detail(request, pk):
     pool = get_object_or_404(Pool, pk=pk)
     return render(request, 'pool/pool_detail.html', {'pool': pool})
@@ -123,16 +140,27 @@ def pool_update(request, pk):
         form = PoolForm(request.POST, instance=pool)
         if form.is_valid():
             form.save()
-            return redirect('pool_detail', pk=pk)
     else:
         form = PoolForm(instance=pool)
     return render(request, 'pool/add_pool.html', {'form': form})
 
-@login_required
-def delete(request, pk):
-    pool = Pool.objects.get( pk=pk)
-    pool.delete()
-    return redirect('pool_list')
+
+def deletepool(request, pk):
+    pool = Pool.objects.get(id=pk)
+    context ={"pool":pool}
+    if request.method == "POST":
+        pool.delete()
+        return redirect('pool_list')
+    return render(request, 'pool/delete_form.html', context)
+
+def deleteworkout(request, pk):
+    workout = SwimWorkout.objects.get(id=pk)
+    context ={"workout":workout}
+    if request.method == "POST":
+        workout.delete()
+        return redirect('workout_list')
+    return render(request, 'pool/delete_form.html', context)
+
 
 
 

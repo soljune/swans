@@ -1,0 +1,61 @@
+{% extends 'main.html' %}
+{% block content %}
+<style>
+  body {
+    background-color: #0d1b2a;
+    color: #f8f9fa;
+  }
+
+  .section-box {
+    background-color: #1b263b;
+    padding: 3rem 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+  }
+
+  ul {
+    padding-left: 1rem;
+  }
+
+  ul li {
+    margin-bottom: 0.5rem;
+  }
+
+  h1, h3, h4 {
+    color: #f8f9fa;
+  }
+
+
+</style>
+
+<div class="container">
+
+  <section class="section-box text-center">
+    <h1 class="display-5 mb-4">About DarkWaters</h1>
+    <p class="lead">
+      DarkWaters helps swimmers find nearby pools and track their workouts. Whether you're training hard or just having fun, we've got you covered.
+    </p>
+    <p>
+      We aim to make swimming easier and more motivating by giving you a simple space to log swims and stay on track.
+    </p>
+  </section>
+
+
+  <section class="section-box">
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <h4>🏊 What We Offer</h4>
+        <ul>
+          <li>Find public and private pools in your area</li>
+          <li>Log and track your swim workouts easily</li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <h4>📍 How It Works</h4>
+        <p>Sign up, search for a pool, add your workouts — that’s it. No clutter, just swimming.</p>
+        <p>We’re building a space made for swimmers, and you're part of it.</p>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}

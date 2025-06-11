@@ -1,17 +1,30 @@
-<!-- pool/pool_detail.html -->
+
 {% extends 'main.html' %}
 {% block content %}
 <div class="container my-4">
     <h2>Pool Details</h2>
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">{{ pool.name }}</h5>
-            <p class="card-text">Location: {{ pool.location }}</p>
-            <p class="card-text">Length: {{ pool.length }} meters</p>
-        </div>
+     <p class="card-text">
+                            <p>Address:</p> {{ pool.address }}<br>
+                            <p>Hours:</p> {{ pool.open_time }} - {{ pool.close_time }}<br>
+                            <p>Entry Price:</p> ${{ pool.entry_price }}<br>
+                        </p>
+                        <ul class="list-unstyled">
+                            {% if pool.has_changing_room %}
+                                <li>✓ Changing Room</li>
+                            {% endif %}
+                            {% if pool.has_restaurant %}
+                                <li>✓ Restaurant</li>
+                            {% endif %}
+                            {% if pool.has_parking %}
+                                <li>✓ Parking</li>
+                            {% endif %}
+                        </ul>
+                        {% if pool.notes %}
+                            <p class="card-text"><small>{{ pool.notes }}</small></p>
+                        {% endif %}
         <div class="card-footer">
             <a href="{% url 'pool_update' pool.pk %}" class="btn btn-primary">Edit</a>
-            <a href="{% url 'pool_delete' pool.pk %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'delete-pool' pool.pk %}" class="btn btn-danger">Delete</a>
             <a href="{% url 'pool_list' %}" class="btn btn-secondary">Back to List</a>
         </div>
     </div>

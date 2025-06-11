@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'finder'
+    # 'django_daraja'
 ]
 
 MIDDLEWARE = [
@@ -96,8 +97,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
@@ -110,11 +109,25 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
+STATIC_URL = '/finders/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "finders/static/",
+    ]
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = 'login'
+
+#
+#
+# MPESA_ENVIRONMENT = 'sandbox'
+# MPESA_CONSUMER_KEY = 'e4Adjmcd97qLF8FGcDyBTCEwrjIaiTfZroygGfYalofbYVmh'
+# MPESA_CONSUMER_SECRET = 'ltMxk52A8zbx79kkwnqZkXmA6nLco1UKTzxhaBmi3y0G4oLFS70jKjkxc1A5kKum'
+# MPESA_SHORTCODE = ''
+# MPESA_EXPRESS_SHORTCODE = ''
+# MPESA_SHORTCODE_TYPE = 'paybill'
+# MPESA_PASSKEY = 'your_passkey'
+# MPESA_INITIATOR_USERNAME = 'initiator_user'
+# MPESA_INITIATOR_SECURITY_CREDENTIAL = 'your_security_credential'
